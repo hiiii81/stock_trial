@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock_clinical trial</title>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // index.html 로드가 완료되면 자동으로 showStar() 함수를 호출합니다.
+            showStack();
+        });
+
+        function showStack() {
+            alert("kkk")
+            $.ajax({
+                type: 'GET',
+                url: '/api/stock_list',
+                data: {},
+                success: function (response) {
+                    let company_name = response['company_name']
+                    alert(response['stock'])
+                    let stock = response['stock']
+                    alert(response['percent'])
+                    let percent = response['percent']
+                    alert(response['number_trial'])
+                    let number_trial = response['number_trial']
+
+                    let tempHtml=`<div class="row">
+                          <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                              <img src="../static/logos/pfizer.jpeg" alt="회사 로고" width="70">
+                              <div class="caption">
+                                <h3>${company_name}</h3>
+                                <p> ${stock}, ${percent}</p>
+                                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>`
+                     $('#company').append(tempHtml)
+
+                    let row_tempHtml=`<tr>
+                        <td class="active">${company_name}</td>
+                        <td class="success">${stock}</td>
+                        <td class="warning">${number_trial}</td>
+                        <td class="danger">Not yet recruting</td>
+                        <td class="info">Recruiting/Enrolling</td>
+                        <td class="info">Active, not recruiting</td>
+                        <td class="info">Suspended</td>
+                        <td class="info">Terminated</td>
+                        <td class="info">Completed</td>
+                        <td class="info">Withdrawn</td>
+                        <td class="info">Unknown status</td>
+                    </tr>`
+                    $('#company_list_each').append(row_tempHtml)
+                }
+            });
+        }
+
+
+    </script>
+
+
+</head>
+<body>
+
+    <div class="jumbotron">
+      <h2>Stock_pharmaceutical company</h2>
+      <p>미국 상장 제약 회사의 임상시험현황</p>
+    </div>
+
+
+    <div id="company">
+        <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img src="../static/logos/pfizer.jpeg" alt="회사 로고" width="70">
+              <div class="caption">
+                <h3>pfizer</h3>
+                <p> 주가 , 임상시험 질환변 개수 및 status</p>
+                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <table class="table table-hover" id="company_list_each">
+        <!-- On rows -->
+        <!--
+<tr class="active">tr</tr>
+<tr class="success">tr2</tr>
+<tr class="warning">tr3</tr>
+<tr class="danger">tr4</tr>
+<tr class="info">tr5</tr>-->
+
+<!-- On cells (`td` or `th`) -->
+     <tr>
+        <th class="active">Company</th>
+        <th class="success">Stock price</th>
+        <th class="warning"># COVID-19 trial</th>
+        <th class="danger">Not yet recruiting</th>
+        <th class="info">Recruiting/Enrolling</th>
+        <th class="info">Active, not recruiting</th>
+        <th class="info">Suspended</th>
+        <th class="info">Terminated</th>
+        <th class="info">Completed</th>
+        <th class="info">Withdrawn</th>
+        <th class="info">Unknown status</th>
+    </tr>
+
+
+</table>
+{#<div id="company_list_each">#}
+{##}
+{#</div>#}
+</body>
+</html>
